@@ -1,8 +1,6 @@
+assets = require 'connect-assets'
 mongoq = require 'mongoq'
 require('zappa') ->
-
-    # zappa configuration
-    @use 'bodyParser', 'methodOverride', @app.router, static: "#{__dirname}/public"
 
     @configure
         development: =>
@@ -14,6 +12,11 @@ require('zappa') ->
             @app.db = mongoq('mongodb://localhost/filing')
             console.log('** production mode **')
 
+    # zappa configuration
+    @use 'bodyParser', 'methodOverride', @app.router, static: "#{__dirname}/public"
+    @use assets()
+
+
     @app.files = @app.db.collection('files')
 
     # use http://coffeekup.org/
@@ -22,10 +25,9 @@ require('zappa') ->
         html ->
             head ->
                 title @title
-                link rel:'stylesheet', href:'/js/ext/resources/css/ext-all.css'
-                script src:'/js/ext/adapter/ext/ext-base.js'
-                script src:'/js/ext/ext-all-debug.js'
-                script src: '/js/app.js'
+                link rel:'stylesheet', href:'/ext/resources/css/ext-all.css'
+                script src:'/ext/ext-debug.js'
+                js('app')
             body @body
 
     @view index: ->

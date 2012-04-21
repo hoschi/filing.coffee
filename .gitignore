@@ -1,7 +1,6 @@
 *.un~
 *.swp
 *.swo
-Session.vim
-.nodester.appconfig
 node_modules
-public/js/ext
+public/ext
+builtAssets
