@@ -1,0 +1,9 @@
+{
+  "name": "filing.js",
+  "description": "Manage your filing with node",
+  "author": "hoschi <vollekannehoschi@gmail.com>",
+  "dependencies": {
+    "zappa": ">= 0.3.3",
+  },
+  "engine": "node 0.6.15"
+}
