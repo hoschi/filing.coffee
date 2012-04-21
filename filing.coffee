@@ -1,9 +1,20 @@
+mongoq = require 'mongoq'
 require('zappa') ->
+
+    # zappa configuration
     @use 'bodyParser', 'methodOverride', @app.router, static: "#{__dirname}/public"
 
     @configure
-        development: => @use errorHandler: {dumpExceptions: on}
-        production: => @use 'errorHandler'
+        development: =>
+            @use errorHandler: {dumpExceptions: on}
+            @app.db = mongoq('mongodb://localhost/filing-dev')
+            console.log('** developing mode **')
+        production: =>
+            @use 'errorHandler'
+            @app.db = mongoq('mongodb://localhost/filing')
+            console.log('** production mode **')
+
+    @app.files = @app.db.collection('files')
 
     # use http://coffeekup.org/
     @view layout: ->
@@ -22,5 +33,13 @@ require('zappa') ->
 
     @get '/': ->
         @render 'index', title: 'File me a coffee'
+
+    @get '/files': ->
+        @app.files.find().toArray (err, data) =>
+            @response.json
+                data: data
+                total: data.length
+
+
 
 
