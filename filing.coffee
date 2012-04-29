@@ -31,7 +31,7 @@ require('zappa') ->
             body @body
 
     @view index: ->
-        p "You should see some ext code here, damn!"
+        '' # all other stuff should be handled by ext application
 
     @get '/': ->
         @render 'index', title: 'File me a coffee'

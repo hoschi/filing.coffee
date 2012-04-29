@@ -1,16 +1,12 @@
+# require stuff here to tell assets that he has to watch these files for changes
+#= require_tree controller
+#= require_tree model
+#= require_tree store
+#= require_tree view
 Ext.application
-    name: 'filing',
+    name: 'Filing'
 
-    #appFolder: 'app',
-    #autoCreateViewport: true,
-
-    launch: ->
-        Ext.create 'Ext.container.Viewport',
-            layout: 'border',
-            title: 'Your files',
-            items: [{
-                    region:'center',
-                    html : 'List files here'
-                }
-            ]
-
+    # set up namespace for ext loader
+    appFolder: 'js/app'
+    # create app/view/Viewport.coffee
+    autoCreateViewport: true
