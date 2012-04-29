@@ -16,7 +16,6 @@ require('zappa') ->
     @use 'bodyParser', 'methodOverride', @app.router, static: "#{__dirname}/public"
     @use assets()
 
-
     @app.files = @app.db.collection('files')
 
     # use http://coffeekup.org/
@@ -26,7 +25,10 @@ require('zappa') ->
             head ->
                 title @title
                 link rel:'stylesheet', href:'/js/ext/resources/css/ext-all.css'
-                script src:'/js/ext/ext-debug.js'
+                if process.env.NODE_ENV is 'production'
+                    script src:'/js/ext/ext-all.js'
+                else
+                    script src:'/js/ext/ext-debug.js'
                 js('app/app')
             body @body
 
