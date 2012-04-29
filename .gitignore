@@ -2,5 +2,5 @@
 *.swp
 *.swo
 node_modules
-public/ext
+public/js/ext
 builtAssets

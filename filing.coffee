@@ -25,9 +25,9 @@ require('zappa') ->
         html ->
             head ->
                 title @title
-                link rel:'stylesheet', href:'/ext/resources/css/ext-all.css'
-                script src:'/ext/ext-debug.js'
-                js('app')
+                link rel:'stylesheet', href:'/js/ext/resources/css/ext-all.css'
+                script src:'/js/ext/ext-debug.js'
+                js('app/app')
             body @body
 
     @view index: ->
