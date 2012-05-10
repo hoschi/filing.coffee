@@ -16,6 +16,9 @@ Ext.define 'Filing.view.Viewport',
                 ,
                     region:'center'
                     xtype:'list'
+                ,
+                    region:'south'
+                    html:'<a href="http://localhost:3000/js/ext/docs/index.html">Extjs offline docu, hosted by zappa server</a>'
                 ]
             ]
         ]
