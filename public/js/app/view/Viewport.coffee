@@ -1,4 +1,3 @@
-#= require List.coffee
 Ext.define 'Filing.view.Viewport',
     extend: 'Ext.container.Viewport'
     layout: 'fit'

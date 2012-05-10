@@ -1,4 +1,3 @@
-assets = require 'connect-assets'
 mongoq = require 'mongoq'
 require('zappa') ->
 
@@ -14,7 +13,6 @@ require('zappa') ->
 
     # zappa configuration
     @use 'bodyParser', 'methodOverride', @app.router, static: "#{__dirname}/public"
-    @use assets()
 
     @app.files = @app.db.collection('files')
 
@@ -29,7 +27,7 @@ require('zappa') ->
                     script src:'/js/ext/ext-all.js'
                 else
                     script src:'/js/ext/ext-debug.js'
-                js('app/app')
+                script src:'/js/app/app.js'
             body @body
 
     @view index: ->

@@ -1,4 +1,3 @@
-#= require ../store/Files.coffee
 Ext.define 'Filing.view.List',
     extend:'Ext.grid.Panel'
     alias:'widget.list'
