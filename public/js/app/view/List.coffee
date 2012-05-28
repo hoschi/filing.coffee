@@ -5,14 +5,22 @@ Ext.define 'Filing.view.List',
     store:'Files'
     title:'Your files:'
 
+    selType: 'cellmodel',
+    plugins: [
+        Ext.create('Ext.grid.plugin.CellEditing', {
+            clicksToEdit: 1
+        })
+    ],
+
     initComponent: ->
         @columns = [
             header: 'ID'
             dataIndex: 'id'
-            flex:1
+            width: 25
         ,
             header: 'Title'
             dataIndex: 'title'
             flex:1
+            editor: 'textfield'
         ]
         @callParent arguments
