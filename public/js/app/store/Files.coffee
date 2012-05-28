@@ -7,4 +7,7 @@ Ext.define 'Filing.store.Files',
     ,
         id: 2
         title: 'test2'
+    ,
+        id: 3
+        title: 'test3'
     ]

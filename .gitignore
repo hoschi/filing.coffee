@@ -3,4 +3,6 @@
 *.swo
 node_modules
 public/js/ext
+public/js/app/*.js
+public/js/app/**/*.js
 builtAssets
