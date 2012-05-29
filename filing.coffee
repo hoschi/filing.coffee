@@ -42,6 +42,3 @@ require('zappa') ->
                 data: data
                 total: data.length
 
-
-
-
