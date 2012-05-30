@@ -36,9 +36,19 @@ require('zappa') ->
     @get '/': ->
         @render 'index', title: 'File me a coffee'
 
+    #
+    # files collection REST api
+    #
     @get '/files': ->
         @app.files.find().toArray (err, data) =>
             @response.json
                 data: data
                 total: data.length
+
+    # TODO fix this!
+    @put '/files/:id': ->
+        @app.files.update {id: @params.id}, {id: @body.id, title: @body.title}, {}, =>
+            console.log "Saved file with id #{@body.id} and title #{@body.title}."
+            @response.json @body
+
 
