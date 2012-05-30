@@ -10,7 +10,7 @@ Ext.define 'Filing.view.Viewport',
                 layout: 'border'
                 items: [
                     region:'north'
-                    html:'add new file'
+                    xtype:'new'
                     height:100
                 ,
                     region:'center'

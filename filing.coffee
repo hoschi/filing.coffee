@@ -36,6 +36,20 @@ require('zappa') ->
     @get '/': ->
         @render 'index', title: 'File me a coffee'
 
+    @post '/addFile': ->
+        @app.files.insert(@body)
+            .done =>
+                console.log 'New file inserted'
+                @response.json
+                    success: true
+            .fail (err) =>
+                console.log 'An error occured during inserting new file'
+                console.log err
+                @response.json
+                    success: false
+                    errors:
+                        msg: err
+
     #
     # files collection REST api
     #
