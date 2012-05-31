@@ -54,15 +54,24 @@ require('zappa') ->
     # files collection REST api
     #
     @get '/files': ->
-        @app.files.find().toArray (err, data) =>
-            @response.json
-                data: data
-                total: data.length
+        @app.files.find()
+            .sort('id')
+            .toArray (err, data) =>
+                @response.json
+                    data: data
+                    total: data.length
 
-    # TODO fix this!
     @put '/files/:id': ->
-        @app.files.update {id: @params.id}, {id: @body.id, title: @body.title}, {}, =>
-            console.log "Saved file with id #{@body.id} and title #{@body.title}."
-            @response.json @body
+        @app.files.update({id: @params.id}, @body)
+            .done =>
+                console.log "Saved file with id #{@params.id}."
+                @response.json @body
+            .fail (err) =>
+                console.log 'An error occured during updating a file'
+                console.log err
+                @response.json
+                    success: false
+                    errors:
+                        msg: err
 
 
