@@ -4,14 +4,12 @@ Ext.define 'Filing.view.Viewport',
 
     initComponent: ->
         @items = [
-            title:'Your files'
             layout:'fit'
             items :[
                 layout: 'border'
                 items: [
                     region:'north'
                     xtype:'new'
-                    height:100
                 ,
                     region:'center'
                     xtype:'list'

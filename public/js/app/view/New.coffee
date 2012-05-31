@@ -5,6 +5,7 @@ Ext.define 'Filing.view.New',
     # TODO this doesn't work
     url: 'addFile'
 
+    title: 'Add a file'
     bodyPadding: 5
 
     defaults:
