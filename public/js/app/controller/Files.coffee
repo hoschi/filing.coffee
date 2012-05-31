@@ -13,6 +13,12 @@ Ext.define 'Filing.controller.Files',
         @control
             new:
                 actioncomplete: @formActionComplete
+            list:
+                deleteFile: @deleteFile
 
     formActionComplete: (form, action) ->
-        @getList().store.load()
+        @getList().getStore().load()
+
+    deleteFile: (rowIndex) ->
+        console.debug 'controller delete'
+        @getList().getStore().removeAt(rowIndex)

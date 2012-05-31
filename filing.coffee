@@ -74,4 +74,16 @@ require('zappa') ->
                     errors:
                         msg: err
 
+    @del '/files/:id': ->
+        @app.files.remove({id: @params.id})
+            .done =>
+                console.log "Removed file with id #{@params.id}."
+                @response.json @body
+            .fail (err) =>
+                console.log 'An error occured during deleting a file'
+                console.log err
+                @response.json
+                    success: false
+                    errors:
+                        msg: err
 

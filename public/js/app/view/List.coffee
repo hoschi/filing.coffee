@@ -13,14 +13,29 @@ Ext.define 'Filing.view.List',
     ],
 
     initComponent: ->
+        @addEvents 'deleteFile'
         @columns = [
+            sortable: false
+            menuDisabled: true
+            xtype: 'actioncolumn'
+            width: 25
+            items: [
+                    icon: 'js/ext/examples/shared/icons/fam/delete.gif'
+                    tooltip: 'Delete',
+                    handler: (grid, rowIndex, colIndex) ->
+                        console.debug 'fire delete', grid, grid.getId(), rowIndex
+                        grid.ownerCt.fireEvent('deleteFile', rowIndex)
+            ]
+        ,
             header: 'ID'
             dataIndex: 'id'
-            width: 25
+            width: 35
+            sortable: true
         ,
             header: 'Title'
             dataIndex: 'title'
             flex:1
             editor: 'textfield'
+            sortable: true
         ]
         @callParent arguments
