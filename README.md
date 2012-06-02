@@ -16,7 +16,6 @@ Filing.coffee is a simple node application to manage your filing.
 # todo
 
 * don't insert files with same id
-* auto update ID when adding a file
 * get next free ID with button
 * add description
 * add "last recent updated" files view
@@ -29,3 +28,4 @@ Filing.coffee is a simple node application to manage your filing.
 * delete one file
 * add a file
 * make file list sortable
+* auto update ID when adding a file

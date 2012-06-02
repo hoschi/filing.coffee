@@ -12,6 +12,8 @@ Ext.define 'Filing.controller.Files',
             selector: 'new'
     ]
 
+    lastId: null
+
     init: ->
         @control
             new:
@@ -35,6 +37,9 @@ Ext.define 'Filing.controller.Files',
 
     createNewFile: () ->
         one = Ext.create 'Filing.model.File'
+        if @lastId isnt null
+            one.set 'id', ++@lastId
+
         console.debug 'load fresh file into "new file" form', one
         @getForm().loadRecord one
 
@@ -45,6 +50,7 @@ Ext.define 'Filing.controller.Files',
             record.save
                     success: (record) =>
                         console.info('Success', record)
+                        @lastId = record.get 'id'
                         @createNewFile()
                         @updateList()
                 ,
