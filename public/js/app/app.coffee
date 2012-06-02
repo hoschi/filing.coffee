@@ -1,6 +1,9 @@
 Ext.Loader.setConfig
     enabled:true
 
+Ext.JSON.encodeDate = (o) ->
+    '"' + Ext.Date.format(o, 'c') + '"'
+
 Ext.application
     name: 'Filing'
 

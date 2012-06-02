@@ -37,5 +37,16 @@ Ext.define 'Filing.view.List',
             flex:1
             editor: 'textfield'
             sortable: true
+        ,
+            header: 'Updated'
+            dataIndex: 'updatedAt'
+            flex:1
+            sortable: true
+        ,
+            header: 'Created'
+            dataIndex: 'createdAt'
+            hidden: true
+            flex:1
+            sortable: true
         ]
         @callParent arguments

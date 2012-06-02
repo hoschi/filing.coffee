@@ -63,6 +63,9 @@ Ext.define 'Filing.controller.Files',
             if record.validate() is false
                 Ext.Msg.alert("Model instance isn't valid!")
 
+            # set creation time
+            record.set 'createdAt', new Date()
+
             record.save
                     success: (record) =>
                         console.info('Success', record)

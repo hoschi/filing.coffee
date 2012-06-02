@@ -54,6 +54,8 @@ require('zappa') ->
         @app.files.insert
                 id: new bson.Long @body.id
                 title: @body.title
+                createdAt: Date.parse @body.createdAt
+                updatedAt: Date.parse @body.updatedAt
             ,
                 safe:true
             .done (doc) =>
@@ -68,6 +70,7 @@ require('zappa') ->
                         msg: err
 
     @put '/files/:id': ->
+        console.log @body.updatedAt
         @app.files.findAndModify(
                 # find it
                 _id: new ID @params.id
@@ -78,6 +81,7 @@ require('zappa') ->
                 # update it
                 id: @body.id
                 title: @body.title
+                updatedAt: Date.parse @body.updatedAt
             ,
                 # options
                 new:true

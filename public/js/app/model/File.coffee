@@ -16,6 +16,14 @@ Ext.define 'Filing.model.File',
         ,
             name:'title'
             type:'string'
+        ,
+            name:'createdAt'
+            type:'date'
+            dateFormat: 'time'
+        ,
+            name:'updatedAt'
+            type:'date'
+            dateFormat: 'time'
     ]
 
     validations: [
@@ -31,3 +39,11 @@ Ext.define 'Filing.model.File',
     proxy:
         type: 'filing'
         url: '/files'
+
+    set: (fieldName, newValue) ->
+        # set updated field to now
+        if fieldName isnt 'updatedAt'
+            @set 'updatedAt', new Date()
+            console.log "set updated time to now, because field '#{fieldName}' was updated with '#{newValue}'."
+        @callParent(arguments)
+
