@@ -4,8 +4,20 @@ Filing.coffee is a simple node application to manage your filing.
 
 # dev environment
 
-* install nodemon@0.6.9
+* install the node (use nave if you want) version specified in package.json
+* install nodemon@0.6.9 for auto restart filing.coffee
+* install dependcies with "npm install"
+* install mongodb
+* (switch connection strings in filing.coffee)
 * symlink or copy an unzipped extjs 4.1 dir into public/js/ext
-* install mongodb or switch connection strings in filing.coffee
-* compile coffee script with "coffee -cw public/js/app"
+* compile coffee scripts with "coffee -cw public/js/app"
 * gogogogo
+
+# todo
+
+* don't insert files with same id
+* auto update ID when adding a file
+* get next free ID with button
+* add description
+* add "last recent updated" files view
+* add client search for files
