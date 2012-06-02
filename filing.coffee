@@ -1,4 +1,6 @@
 mongoq = require 'mongoq'
+ObjectID = mongoq.BSON.ObjectID
+
 require('zappa') ->
 
     @configure
@@ -36,12 +38,22 @@ require('zappa') ->
     @get '/': ->
         @render 'index', title: 'File me a coffee'
 
-    @post '/addFile': ->
-        @app.files.insert(@body)
-            .done =>
-                console.log 'New file inserted'
+    #
+    # files collection REST api
+    #
+    @get '/files': ->
+        @app.files.find()
+            .sort('id', 'asc')
+            .toArray (err, data) =>
                 @response.json
-                    success: true
+                    data: data
+                    total: data.length
+
+    @post '/files': ->
+        @app.files.insert(@body, {safe:true})
+            .done (doc) =>
+                console.log 'New file inserted'
+                @response.json doc
             .fail (err) =>
                 console.log 'An error occured during inserting new file'
                 console.log err
@@ -50,22 +62,15 @@ require('zappa') ->
                     errors:
                         msg: err
 
-    #
-    # files collection REST api
-    #
-    @get '/files': ->
-        @app.files.find()
-            .sort('id')
-            .toArray (err, data) =>
-                @response.json
-                    data: data
-                    total: data.length
-
     @put '/files/:id': ->
-        @app.files.update({id: @params.id}, @body)
-            .done =>
+        @app.files.findAndModify({_id: new ObjectID @params.id }, {},
+            # properties to update
+            id: @body.id
+            title: @body.title
+        , {new:true})
+            .done (doc) =>
                 console.log "Saved file with id #{@params.id}."
-                @response.json @body
+                @response.json doc
             .fail (err) =>
                 console.log 'An error occured during updating a file'
                 console.log err
@@ -74,8 +79,15 @@ require('zappa') ->
                     errors:
                         msg: err
 
+    @get '/files/:id': ->
+        @app.files.find({_id: new ObjectID @params.id })
+            .toArray (err, data) =>
+                @response.json
+                    data: data
+                    total: data.length
+
     @del '/files/:id': ->
-        @app.files.remove({id: @params.id})
+        @app.files.remove({_id: new ObjectID @params.id })
             .done =>
                 console.log "Removed file with id #{@params.id}."
                 @response.json @body
