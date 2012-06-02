@@ -29,7 +29,7 @@ require('zappa') ->
                 if process.env.NODE_ENV is 'production'
                     script src:'/js/ext/ext-all.js'
                 else
-                    script src:'/js/ext/ext-debug.js'
+                    script src:'/js/ext/ext-all-debug.js'
                 script src:'/js/app/app.js'
             body @body
 
@@ -68,11 +68,22 @@ require('zappa') ->
                         msg: err
 
     @put '/files/:id': ->
-        @app.files.findAndModify({_id: new ID @params.id }, {},
-            # properties to update
-            id: @body.id
-            title: @body.title
-        , {new:true})
+        @app.files.findAndModify(
+                # find it
+                _id: new ID @params.id
+            ,
+                # sort it
+                {}
+            ,
+                # update it
+                id: @body.id
+                title: @body.title
+            ,
+                # options
+                new:true
+                safe:true
+            )
+            # return it
             .done (doc) =>
                 console.log "Saved file with id #{@params.id}."
                 @response.json doc
