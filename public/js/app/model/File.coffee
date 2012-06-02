@@ -7,7 +7,25 @@ Ext.define 'Filing.model.File',
         'Filing.data.proxy.Rest'
     ]
 
-    fields: ['_id', 'id', 'title']
+    fields: [
+            name:'_id'
+            type:'string'
+        ,
+            name:'id'
+            type:'int'
+        ,
+            name:'title'
+            type:'string'
+    ]
+
+    validations: [
+            type:'presence',
+            field:'title'
+        ,
+            type:'presence',
+            field:'id'
+        ,
+    ]
     idProperty: '_id'
 
     proxy:

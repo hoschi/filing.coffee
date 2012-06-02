@@ -10,6 +10,9 @@ Ext.define 'Filing.controller.Files',
         ,
             ref: 'new'
             selector: 'new'
+        ,
+            ref: 'addIdField'
+            selector: 'new numberfield[name="id"]'
     ]
 
     lastId: null
@@ -42,6 +45,9 @@ Ext.define 'Filing.controller.Files',
 
         console.debug 'load fresh file into "new file" form', one
         @getForm().loadRecord one
+        if @lastId is null
+            @getAddIdField().setValue ''
+            @getForm().clearInvalid()
 
     submitNewFile: () ->
         if @getForm().isValid() is true

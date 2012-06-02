@@ -14,6 +14,10 @@ Ext.define 'Filing.view.New',
             fieldLabel: 'ID'
             name: 'id'
             allowBlank: false
+            xtype:'numberfield'
+            minValue: 1
+            allowDecimals: false
+            step: 1
         ,
             fieldLabel: 'Title'
             name: 'title'

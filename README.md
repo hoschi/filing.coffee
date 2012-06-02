@@ -29,3 +29,4 @@ Filing.coffee is a simple node application to manage your filing.
 * add a file
 * make file list sortable
 * auto update ID when adding a file
+* add created and updated dates to a file automagically
