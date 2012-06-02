@@ -15,6 +15,8 @@ Ext.define 'Filing.controller.Files',
             selector: 'new numberfield[name="id"]'
     ]
 
+    # Last ID of file added by this interface
+    # @private
     lastId: null
 
     init: ->
@@ -38,6 +40,7 @@ Ext.define 'Filing.controller.Files',
     getForm: () ->
         @getNew().getForm()
 
+    # create a new file instance for the 'new' widget
     createNewFile: () ->
         one = Ext.create 'Filing.model.File'
         if @lastId isnt null
@@ -51,6 +54,7 @@ Ext.define 'Filing.controller.Files',
         # remove ugly red underline
         @getForm().clearInvalid()
 
+    # save record from 'new' widget to the server
     submitNewFile: () ->
         if @getForm().isValid() is true
             record = @getForm().getRecord()
@@ -68,6 +72,8 @@ Ext.define 'Filing.controller.Files',
                 ,
                     failure: (record) ->
                         Ext.Msg.alert('Failed', record)
+
+    # update 'list' widgets store from server
     updateList: () ->
         @getList().getStore().load()
 
