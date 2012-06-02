@@ -21,3 +21,11 @@ Filing.coffee is a simple node application to manage your filing.
 * add description
 * add "last recent updated" files view
 * add client search for files
+* use connect-assets instead of manual compilation
+
+# done
+
+* list files
+* delete one file
+* add a file
+* make file list sortable
