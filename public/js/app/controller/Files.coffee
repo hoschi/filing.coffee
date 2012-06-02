@@ -47,12 +47,18 @@ Ext.define 'Filing.controller.Files',
         @getForm().loadRecord one
         if @lastId is null
             @getAddIdField().setValue ''
-            @getForm().clearInvalid()
+
+        # remove ugly red underline
+        @getForm().clearInvalid()
 
     submitNewFile: () ->
         if @getForm().isValid() is true
             record = @getForm().getRecord()
             @getForm().updateRecord record
+
+            if record.validate() is false
+                Ext.Msg.alert("Model instance isn't valid!")
+
             record.save
                     success: (record) =>
                         console.info('Success', record)
