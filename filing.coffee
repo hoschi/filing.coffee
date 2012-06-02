@@ -1,5 +1,6 @@
 mongoq = require 'mongoq'
-ObjectID = mongoq.BSON.ObjectID
+bson = mongoq.BSON
+ID = mongoq.BSON.ObjectID
 
 require('zappa') ->
 
@@ -50,7 +51,11 @@ require('zappa') ->
                     total: data.length
 
     @post '/files': ->
-        @app.files.insert(@body, {safe:true})
+        @app.files.insert
+                id: new bson.Long @body.id
+                title: @body.title
+            ,
+                safe:true
             .done (doc) =>
                 console.log 'New file inserted'
                 @response.json doc
@@ -63,7 +68,7 @@ require('zappa') ->
                         msg: err
 
     @put '/files/:id': ->
-        @app.files.findAndModify({_id: new ObjectID @params.id }, {},
+        @app.files.findAndModify({_id: new ID @params.id }, {},
             # properties to update
             id: @body.id
             title: @body.title
@@ -80,14 +85,14 @@ require('zappa') ->
                         msg: err
 
     @get '/files/:id': ->
-        @app.files.find({_id: new ObjectID @params.id })
+        @app.files.find({_id: new ID @params.id })
             .toArray (err, data) =>
                 @response.json
                     data: data
                     total: data.length
 
     @del '/files/:id': ->
-        @app.files.remove({_id: new ObjectID @params.id })
+        @app.files.remove({_id: new ID @params.id })
             .done =>
                 console.log "Removed file with id #{@params.id}."
                 @response.json @body
