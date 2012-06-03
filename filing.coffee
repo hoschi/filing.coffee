@@ -2,8 +2,27 @@ mongoq = require 'mongoq'
 bson = mongoq.BSON
 ID = mongoq.BSON.ObjectID
 
-require('zappa') ->
+# setup options
+argv = require('optimist')
+   .default('domain', 'localhost')
+   .default('port', 3000)
+   .demand(['domain'])
+   .argv
 
+# show infos
+console.log "
+\n\n
+This is your filing app, set domain or port with this arguments:\n
+--domain='localhost'\n
+--port=3000\n
+For production mode run\n\n
+
+    NODE_ENV=production coffee filing.coffee
+\n\n
+"
+
+# start server
+require('zappa') argv.domain, argv.port, ->
     @configure
         development: =>
             @use errorHandler: {dumpExceptions: on}
