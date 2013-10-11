@@ -30,3 +30,7 @@ Filing.coffee is a simple node application to manage your filing.
 * make file list sortable
 * auto update ID when adding a file
 * add created and updated dates to a file automagically
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hoschi/filing.coffee/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
